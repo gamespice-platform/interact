@@ -2,3 +2,7 @@
 # range_m: 2.5
 # focus_angle: 35.0
 # cooldown_seconds: 0.25
+# prompt_key: E
+# prompt_locked_suffix: ""
+# hold_seconds: 0.0
+# server_range_slack: 0.5

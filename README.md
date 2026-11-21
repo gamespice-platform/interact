@@ -47,6 +47,8 @@ Every number is a field on `DotInteractConfig`. The values below are defaults, a
 | `max_candidates` | 0 | Candidates one pick considers, nearest first; 0 is every one. |
 | `hold_seconds` | 0.0 | Default hold time; 0 is an instant press. |
 | `cooldown_seconds` | 0.25 | Seconds before the same actor may use again. |
+| `prompt_key` | E | Key name shown in the prompt. |
+| `prompt_locked_suffix` | empty | Appended to the label of a locked target. |
 | `server_range_slack` | 0.5 | Metres the server adds to the range to forgive latency. |
 
 Layers, weakest first: the defaults, `cfg/addon/dot_interact/*.yml`, the game's files, the operator's files, `DOT_INTERACT_*` environment variables, then `--interact-*` flags.

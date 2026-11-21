@@ -26,6 +26,12 @@ const ADDON := "dot-interact"
 ## Metres the server adds to the range when judging a request, so latency and a step taken while the packet flew do not refuse an honest use.
 @export_range(0.0, 5.0, 0.05) var server_range_slack: float = 0.5
 
+@export_group("Prompt")
+## Text of the use key in the prompt, "[E] Open"; a game with a rebound key sets it.
+@export var prompt_key: String = "E"
+## Shown instead of "[key] label" when the target is locked.
+@export var prompt_locked_suffix: String = ""
+
 
 func env_prefix() -> String:
 	return "DOT_INTERACT_"

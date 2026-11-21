@@ -4,8 +4,8 @@ extends Node
 ## Counts sections run to their last line as well as checks, because a script error
 ## aborts a section and not the run.
 
-const EXPECTED_SECTIONS := 4
-const EXPECTED_CHECKS := 47
+const EXPECTED_SECTIONS := 5
+const EXPECTED_CHECKS := 56
 
 var _passed := 0
 var _failed := 0
@@ -18,6 +18,7 @@ func _ready() -> void:
 	_focus()
 	_hold()
 	_request()
+	_prompt()
 	print("")
 	_check(_sections == EXPECTED_SECTIONS, "every section ran to its last line (%d of %d)" % [_sections, EXPECTED_SECTIONS])
 	_check(_passed + _failed == EXPECTED_CHECKS, "and the suite ran all %d of its checks (%d)" % [EXPECTED_CHECKS, _passed + _failed])
@@ -127,3 +128,26 @@ func _check(ok: bool, what: String, extra: String = "") -> void:
 	else:
 		_failed += 1
 		print("  FAIL  ", what, "  ", extra)
+
+
+func _prompt() -> void:
+	var c := DotInteractConfig.new()
+	var ok := DotInteractPrompt.describe(c, {"label": "Open", "in_range": true})
+	_check(ok.state == DotInteractPrompt.USABLE and ok.text == "[E] Open", "a usable target reads [key] label")
+	c.prompt_key = "F"
+	_check(DotInteractPrompt.describe(c, {"label": "Open", "in_range": true}).text == "[F] Open", "a rebound key shows in the text")
+	var lk := DotInteractPrompt.describe(c, {"label": "Locked door", "in_range": true, "state": &"locked"})
+	_check(lk.state == DotInteractPrompt.LOCKED and lk.text == "Locked door", "a locked target shows the bare label")
+	_check(DotInteractPrompt.describe(c, {}).state == DotInteractPrompt.HIDDEN, "an empty aim hides the prompt")
+	_check(DotInteractPrompt.describe(c, {"label": "Open", "in_range": false}).state == DotInteractPrompt.HIDDEN, "out of range hides it")
+	_check(DotInteractPrompt.describe(c, {"label": "", "in_range": true}).state == DotInteractPrompt.HIDDEN, "no label hides it")
+	c.enabled = false
+	_check(DotInteractPrompt.describe(c, {"label": "Open", "in_range": true}).state == DotInteractPrompt.HIDDEN, "a disabled addon shows nothing")
+	var v := DotInteractPromptView.new()
+	v.setup(DotInteractConfig.new())
+	v.show_aim({"label": "Open", "in_range": true})
+	_check(v.visible and v.text == "[E] Open", "the view shows the prompt")
+	v.show_aim({})
+	_check(not v.visible, "and hides on an empty aim")
+	v.free()
+	_sections += 1

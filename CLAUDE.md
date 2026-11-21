@@ -7,6 +7,7 @@ Press-to-use interaction decisions: focus, hold, server validation. Read the fam
 | `core/dot_interact_config.gd` | `DotInteractConfig`: every tunable, `from_files()` |
 | `core/dot_interact_focus.gd` | `DotInteractFocus`: which candidate the use key acts on (range, cone, line of sight, priority) |
 | `core/dot_interact_hold.gd` | `DotInteractHold`: hold-to-use state machine, no clock of its own |
+| `core/dot_interact_prompt.gd`, `runtime/dot_interact_prompt_view.gd` | `DotInteractPrompt` (pure text and state of the look-at prompt, moved here from the map addon's use prompt) and `DotInteractPromptView` (a Label) |
 | `core/dot_interact_request.gd` | `DotInteractRequest`: the server's verdict on a use request, as a `DotResult` with a reason code |
 | `examples/interact_selftest.tscn` | the headless suite |
 
