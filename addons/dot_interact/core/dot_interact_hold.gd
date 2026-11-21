@@ -1,4 +1,4 @@
-class_name DotInteractHold
+class_name GSInteractHold
 extends RefCounted
 
 ## Hold-to-use as a small state machine with no clock of its own: the caller feeds it frame times. Releasing early, looking away (another target) or being disabled cancels; completing fires once.
@@ -14,7 +14,7 @@ var required: float = 0.0
 
 
 ## Starts holding on [param id]. [param seconds] under 0 uses the config's default; 0 completes on the first [method tick].
-func begin(cfg: DotInteractConfig, id: StringName, seconds: float = -1.0) -> void:
+func begin(cfg: GSInteractConfig, id: StringName, seconds: float = -1.0) -> void:
 	state = HOLDING
 	target = id
 	elapsed = 0.0

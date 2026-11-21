@@ -1,4 +1,4 @@
-class_name DotInteractFocus
+class_name GSInteractFocus
 extends RefCounted
 
 ## Chooses which thing the use key would act on. Pure: the caller measures (distance, angle, line of sight) and this decides, so a client prompt and a server check agree.
@@ -7,7 +7,7 @@ extends RefCounted
 
 
 ## Whether one candidate may be focused at all.
-static func eligible(cfg: DotInteractConfig, c: Dictionary) -> bool:
+static func eligible(cfg: GSInteractConfig, c: Dictionary) -> bool:
 	if not cfg.enabled or not bool(c.get("enabled", true)):
 		return false
 	if cfg.require_line_of_sight and not bool(c.get("visible", true)):
@@ -21,7 +21,7 @@ static func eligible(cfg: DotInteractConfig, c: Dictionary) -> bool:
 
 
 ## The index in [param candidates] of the one to focus, or -1. Higher priority wins, then the smaller angle, then the nearer one, then the earlier one.
-static func pick(cfg: DotInteractConfig, candidates: Array) -> int:
+static func pick(cfg: GSInteractConfig, candidates: Array) -> int:
 	var order: Array = range(candidates.size())
 	if cfg.max_candidates > 0 and order.size() > cfg.max_candidates:
 		order.sort_custom(func(a: int, b: int) -> bool: return float(candidates[a].get("distance", INF)) < float(candidates[b].get("distance", INF)))

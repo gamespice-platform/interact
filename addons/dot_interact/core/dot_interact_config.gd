@@ -1,7 +1,7 @@
-class_name DotInteractConfig
-extends DotConfig
+class_name GSInteractConfig
+extends GSConfig
 
-## Every tunable of press-to-use interaction. A game binds it with DotGameConfigBinder (kind `interact`) for cvars and the workbench; `cfg/addon/dot_interact/*.yml`, `DOT_INTERACT_*` and `--interact-*` layer over these defaults.
+## Every tunable of press-to-use interaction. A game binds it with GSGameConfigBinder (kind `interact`) for cvars and the workbench; `cfg/addon/dot_interact/*.yml`, `DOT_INTERACT_*` and `--interact-*` layer over these defaults.
 
 const ADDON := "dot-interact"
 
@@ -41,22 +41,22 @@ func cli_prefix() -> String:
 	return "--interact-"
 
 
-func validate() -> DotResult:
+func validate() -> GSResult:
 	if range_m <= 0.0:
-		return DotResult.fail(DotError.CODE_INVALID, "interact range_m %.2f must be positive" % range_m)
+		return GSResult.fail(GSError.CODE_INVALID, "interact range_m %.2f must be positive" % range_m)
 	if focus_angle < 0.0 or focus_angle > 180.0:
-		return DotResult.fail(DotError.CODE_INVALID, "interact focus_angle %.0f must be 0 to 180 (0 is any direction)" % focus_angle)
+		return GSResult.fail(GSError.CODE_INVALID, "interact focus_angle %.0f must be 0 to 180 (0 is any direction)" % focus_angle)
 	if max_candidates < 0:
-		return DotResult.fail(DotError.CODE_INVALID, "interact max_candidates %d is negative (0 is every candidate)" % max_candidates)
+		return GSResult.fail(GSError.CODE_INVALID, "interact max_candidates %d is negative (0 is every candidate)" % max_candidates)
 	if hold_seconds < 0.0 or cooldown_seconds < 0.0 or server_range_slack < 0.0:
-		return DotResult.fail(DotError.CODE_INVALID, "interact hold_seconds, cooldown_seconds and server_range_slack cannot be negative")
-	return DotResult.success(self)
+		return GSResult.fail(GSError.CODE_INVALID, "interact hold_seconds, cooldown_seconds and server_range_slack cannot be negative")
+	return GSResult.success(self)
 
 
 ## Defaults, then `cfg/addon/dot_interact/*.yml` and the game tier, then environment and command line.
-static func from_files() -> DotResult:
-	var cfg := DotInteractConfig.new()
-	var files := DotAddonConfig.load_dir(ADDON)
+static func from_files() -> GSResult:
+	var cfg := GSInteractConfig.new()
+	var files := GSAddonConfig.load_dir(ADDON)
 	if not files.ok:
 		return files
 	cfg.apply_dictionary(files.value as Dictionary, "yml")

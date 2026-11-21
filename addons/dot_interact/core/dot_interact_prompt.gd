@@ -1,4 +1,4 @@
-class_name DotInteractPrompt
+class_name GSInteractPrompt
 extends RefCounted
 
 ## The text and state of the look-at prompt as a pure model: "[E] Open" while something usable is in reach, the bare label when it is locked, nothing otherwise. A view only draws what [method describe] returns.
@@ -11,7 +11,7 @@ const LOCKED := 2
 
 
 ## Returns `{state, text}`; the state is HIDDEN, USABLE or LOCKED. An empty aim, an empty label or a target out of range is HIDDEN.
-static func describe(cfg: DotInteractConfig, aim: Dictionary) -> Dictionary:
+static func describe(cfg: GSInteractConfig, aim: Dictionary) -> Dictionary:
 	var label := String(aim.get("label", ""))
 	if aim.is_empty() or label == "" or not bool(aim.get("in_range", false)) or not cfg.enabled:
 		return {"state": HIDDEN, "text": ""}
