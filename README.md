@@ -6,8 +6,8 @@ This first slice is the decisions, as pure code a client and a server share: whi
 
 ## Install
 
-1. Copy `addons/dot_interact/` and `addons/dot_core/` into your project.
-2. Enable dot-interact in *Project > Project Settings > Plugins*.
+1. Copy `addons/gs_interact/` and `addons/gs_core/` into your project.
+2. Enable gs-interact in *Project > Project Settings > Plugins*.
 
 ## Quick start
 
@@ -51,7 +51,7 @@ Every number is a field on `GSInteractConfig`. The values below are defaults, an
 | `prompt_locked_suffix` | empty | Appended to the label of a locked target. |
 | `server_range_slack` | 0.5 | Metres the server adds to the range to forgive latency. |
 
-Layers, weakest first: the defaults, `cfg/addon/dot_interact/*.yml`, the game's files, the operator's files, `DOT_INTERACT_*` environment variables, then `--interact-*` flags.
+Layers, weakest first: the defaults, `cfg/addon/gs_interact/*.yml`, the game's files, the operator's files, `GS_INTERACT_*` environment variables, then `--interact-*` flags.
 
 ## What it is not
 

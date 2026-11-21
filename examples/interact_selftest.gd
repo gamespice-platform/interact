@@ -1,6 +1,6 @@
 extends Node
 
-## dot-interact's headless suite (res://examples/interact_selftest.tscn).
+## gs-interact's headless suite (res://examples/interact_selftest.tscn).
 ## Counts sections run to their last line as well as checks, because a script error
 ## aborts a section and not the run.
 
@@ -13,7 +13,7 @@ var _sections := 0
 
 
 func _ready() -> void:
-	print("dot-interact")
+	print("gs-interact")
 	_config()
 	_focus()
 	_hold()

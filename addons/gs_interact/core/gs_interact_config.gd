@@ -1,9 +1,9 @@
 class_name GSInteractConfig
 extends GSConfig
 
-## Every tunable of press-to-use interaction. A game binds it with GSGameConfigBinder (kind `interact`) for cvars and the workbench; `cfg/addon/dot_interact/*.yml`, `DOT_INTERACT_*` and `--interact-*` layer over these defaults.
+## Every tunable of press-to-use interaction. A game binds it with GSGameConfigBinder (kind `interact`) for cvars and the workbench; `cfg/addon/gs_interact/*.yml`, `GS_INTERACT_*` and `--interact-*` layer over these defaults.
 
-const ADDON := "dot-interact"
+const ADDON := "gs-interact"
 
 ## Master switch: off, nothing is focusable and every use request is refused.
 @export var enabled: bool = true
@@ -34,7 +34,7 @@ const ADDON := "dot-interact"
 
 
 func env_prefix() -> String:
-	return "DOT_INTERACT_"
+	return "GS_INTERACT_"
 
 
 func cli_prefix() -> String:
@@ -53,7 +53,7 @@ func validate() -> GSResult:
 	return GSResult.success(self)
 
 
-## Defaults, then `cfg/addon/dot_interact/*.yml` and the game tier, then environment and command line.
+## Defaults, then `cfg/addon/gs_interact/*.yml` and the game tier, then environment and command line.
 static func from_files() -> GSResult:
 	var cfg := GSInteractConfig.new()
 	var files := GSAddonConfig.load_dir(ADDON)
