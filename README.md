@@ -2,6 +2,8 @@
 
 Godot 4.7+ addon for press-to-use interaction: focus selection, prompts, hold-to-use, range and line-of-sight rules, and server-validated use requests for doors, buttons, pickups and vehicles. Part of the [GameSpice](https://github.com/gamespice-platform) family. It needs only [GameSpice Core](https://github.com/gamespice-platform/core).
 
+gs-interact is a [GameSpice](https://gamespice.net) addon (MIT, built with Claude Code). Its headless suite is `examples/interact_selftest.tscn`. The collection at [Zee's Games](https://zeesgames.com) is built on the GameSpice addons and runs on live servers, though this addon has not been adopted by a game yet.
+
 This first slice is the decisions, as pure code a client and a server share: which candidate the use key would act on, a hold-to-use state machine for a progress ring, and the server's verdict on a use request. What a use does (open the door, give the item) stays with the game.
 
 ## Install
@@ -60,6 +62,12 @@ Layers, weakest first: the defaults, `cfg/addon/gs_interact/*.yml`, the game's f
 - Not the prompt art: GameSpice UI and GameSpice HUD draw the prompt and the progress ring from `progress()` and the focused id.
 - Not what a use does: opening a door, taking an item or entering a seat is game code, or GameSpice Vehicle for seats. This addon says whether and when.
 - Not a trust boundary on its own: the server must measure the world itself and call `GSInteractRequest.validate` with what it measured.
+
+## Used by
+
+No shipped game uses it yet; the example scene shows it.
+
+The whole collection is at [zeesgames.com](https://zeesgames.com).
 
 ## Licence
 
