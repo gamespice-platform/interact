@@ -22,11 +22,25 @@ static func eligible(cfg: GSInteractConfig, c: Dictionary) -> bool:
 
 ## The index in [param candidates] of the one to focus, or -1. Higher priority wins, then the smaller angle, then the nearer one, then the earlier one.
 static func pick(cfg: GSInteractConfig, candidates: Array) -> int:
+	var n := candidates.size()
+	if cfg.max_candidates > 0 and n > cfg.max_candidates:
+		return _pick_capped(cfg, candidates)
+	var best := -1
+	for i: int in n:
+		var c: Dictionary = candidates[i]
+		if not eligible(cfg, c):
+			continue
+		if best < 0 or _better(c, candidates[best]):
+			best = i
+	return best
+
+
+## [method pick] over only the `max_candidates` nearest (more candidates than the cap: the sort is worth it then).
+static func _pick_capped(cfg: GSInteractConfig, candidates: Array) -> int:
 	var order: Array = range(candidates.size())
-	if cfg.max_candidates > 0 and order.size() > cfg.max_candidates:
-		order.sort_custom(func(a: int, b: int) -> bool: return float(candidates[a].get("distance", INF)) < float(candidates[b].get("distance", INF)))
-		order = order.slice(0, cfg.max_candidates)
-		order.sort()
+	order.sort_custom(func(a: int, b: int) -> bool: return float(candidates[a].get("distance", INF)) < float(candidates[b].get("distance", INF)))
+	order = order.slice(0, cfg.max_candidates)
+	order.sort()
 	var best := -1
 	for i: int in order:
 		var c: Dictionary = candidates[i]

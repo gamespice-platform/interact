@@ -1,0 +1,10 @@
+# gd-perf
+# Baselines only shrink: scripts/<gate> --update lowers or drops entries and refuses to add.
+addons/gs_interact/core/gs_interact_focus.gd::_better::untyped_array	1
+addons/gs_interact/core/gs_interact_focus.gd::_pick_capped::dynamic_call	1
+addons/gs_interact/core/gs_interact_focus.gd::_pick_capped::untyped_array	3
+addons/gs_interact/core/gs_interact_focus.gd::eligible::untyped_array	1
+addons/gs_interact/core/gs_interact_focus.gd::pick::untyped_array	2
+addons/gs_interact/core/gs_interact_prompt.gd::describe::untyped_array	1
+addons/gs_interact/core/gs_interact_request.gd::validate::untyped_array	1
+addons/gs_interact/runtime/gs_interact_prompt_view.gd::show_aim::untyped_array	1
